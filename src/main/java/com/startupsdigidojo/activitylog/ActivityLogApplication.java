@@ -1,13 +1,13 @@
-package com.startupsdigidojo.usersandteams;
+package com.startupsdigidojo.activitylog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UsersandteamsApplication {
+public class ActivityLogApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UsersandteamsApplication.class, args);
+		SpringApplication.run(ActivityLogApplication.class, args);
 	}
 
 }

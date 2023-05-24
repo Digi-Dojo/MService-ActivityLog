@@ -1,1 +1,1 @@
-rootProject.name = "usersandteams"
+rootProject.name = "activitylog"
