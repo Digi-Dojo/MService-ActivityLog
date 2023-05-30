@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-
+import org.json.JSONObject;
 import java.util.Date;
 
 @RequiredArgsConstructor
@@ -36,5 +36,12 @@ public class NewUser {
                 ", mailAddress='" + mailAddress + '\'' +
                 ", time=" + new Date(time) +
                 '}';
+    }
+
+    public NewUser(String json) {
+        JSONObject jsonObject = new JSONObject(json);
+        name = jsonObject.getJSONObject("payload").getString("name");
+        mailAddress = jsonObject.getJSONObject("payload").getString("mailAddress");
+        time = jsonObject.getJSONObject("payload").getLong("time");
     }
 }

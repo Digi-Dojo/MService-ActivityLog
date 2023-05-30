@@ -1,5 +1,6 @@
 package com.startupsdigidojo.activitylog.newUser.application.kafka;
 
+import com.startupsdigidojo.activitylog.newUser.domain.NewUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -16,6 +17,6 @@ public class Consumer {
             groupId = "${com.startupsdigidojo.activitylog.newUser.application.kafka.consumer.group_id}"
     )
     public void consume(String jsonMessage) {
-        System.out.println("Received:" + jsonMessage);
+        System.out.println(new NewUser(jsonMessage));
     }
 }
