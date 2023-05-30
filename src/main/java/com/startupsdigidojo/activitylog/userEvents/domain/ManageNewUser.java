@@ -1,4 +1,4 @@
-package com.startupsdigidojo.activitylog.newUser.domain;
+package com.startupsdigidojo.activitylog.userEvents.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
