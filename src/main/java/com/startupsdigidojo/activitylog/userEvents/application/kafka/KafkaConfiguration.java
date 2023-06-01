@@ -23,10 +23,22 @@ public class KafkaConfiguration {
     @Value("${com.startupsdigidojo.activitylog.newUser.application.kafka.consumer.group_id}")
     private String consumerGroupId;
 
+    @Value("${spring.kafka.properties.sasl.mechanism}")
+    private String saslMechanism;
+
+    @Value("${spring.kafka.properties.sasl.jaas.config}")
+    private String saslJaasConfig;
+
+    @Value("${spring.kafka.properties.security.protocol}")
+    private String securityProtocol;
+
     @Bean
     public Map<String, Object> baseConsumerProperties() {
         return Map.of(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers,
+                "sasl.mechanism", saslMechanism,
+                "sasl.jaas.config", saslJaasConfig,
+                "security.protocol", securityProtocol,
                 ConsumerConfig.GROUP_ID_CONFIG, consumerGroupId,
                 ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false,
                 ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 15000
