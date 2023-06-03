@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class Consumer {
+public class UserConsumer {
 
     @KafkaListener(
             containerFactory = "newUserEventKafkaListenerContainerFactory",
-            topics = "${com.startupsdigidojo.activitylog.newUser.application.kafka.consumer.topics.new_user}",
+            topics = "${com.startupsdigidojo.activitylog.newUser.application.kafka.UserConsumer.topics.new_user}",
             groupId = "${com.startupsdigidojo.activitylog.newUser.application.kafka.consumer.group_id}"
     )
     public void consume(NewUserEvent newUserEvent) {
