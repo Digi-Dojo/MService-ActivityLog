@@ -6,29 +6,29 @@ import lombok.Setter;
 import java.util.Date;
 
 public class UserEventDTO {
-    public class UserInfo {
+    public static class UserInfo {
         @Setter
         @Getter
-        private Long id;
+        protected Long id;
 
         @Setter
         @Getter
-        private String name;
+        protected String name;
 
         @Setter
         @Getter
-        private String mailAddress;
+        protected String mailAddress;
 
         @Setter
         @Getter
-        private Long time;
+        protected Long time;
     }
 
     @Setter @Getter
-    private String type;
+    protected String type;
 
     @Setter @Getter
-    private UserInfo payload;
+    protected UserInfo payload;
 
     @Override
     public String toString() {

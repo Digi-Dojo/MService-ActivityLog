@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class UserConsumer {
-    @Autowired
     private final ManageUserEvent manageUserEvent;
 
     @KafkaListener(
@@ -21,7 +20,7 @@ public class UserConsumer {
             groupId = "${com.startupsdigidojo.activitylog.newUser.application.kafka.consumer.group_id}"
     )
     public void syncNewUser(NewUserEvent newUserEvent) {
-        System.out.println(newUserEvent.getPayload());
+        System.out.println(newUserEvent);
         manageUserEvent.saveUserEvent(new UserEvent(newUserEvent));
     }
 
@@ -31,7 +30,7 @@ public class UserConsumer {
             groupId = "${com.startupsdigidojo.activitylog.newUser.application.kafka.consumer.group_id}"
     )
     public void syncUserLogIn(UserLogInEvent userLogInEvent) {
-        System.out.println(userLogInEvent.getPayload());
+        System.out.println(userLogInEvent);
         manageUserEvent.saveUserEvent(new UserEvent(userLogInEvent));
     }
 }
