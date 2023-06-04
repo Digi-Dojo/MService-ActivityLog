@@ -16,7 +16,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.Map;
 
 @Configuration
-public class KafkaConfiguration {
+public class UserKafkaConfiguration {
     @Value("${spring.kafka.properties.bootstrap.servers}")
     private String bootstrapServers;
 
@@ -33,7 +33,7 @@ public class KafkaConfiguration {
     private String securityProtocol;
 
     @Bean
-    public Map<String, Object> baseConsumerProperties() {
+    public Map<String, Object> baseUserConsumerProperties() {
         return Map.of(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers,
                 "sasl.mechanism", saslMechanism,
@@ -52,7 +52,7 @@ public class KafkaConfiguration {
         jsonDeserializer.setUseTypeMapperForKey(true);
 
         return new DefaultKafkaConsumerFactory<>(
-                baseConsumerProperties(),
+                baseUserConsumerProperties(),
                 new StringDeserializer(),
                 jsonDeserializer
         );
