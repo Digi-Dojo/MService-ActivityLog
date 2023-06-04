@@ -9,6 +9,7 @@ public class NewUserEvent {
     @Getter
     private String type;
 
-    @Setter @Getter
+    @Setter
+    @Getter
     private NewUser payload;
 }
