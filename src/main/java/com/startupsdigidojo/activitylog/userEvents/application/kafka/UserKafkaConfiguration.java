@@ -1,7 +1,6 @@
 package com.startupsdigidojo.activitylog.userEvents.application.kafka;
 
-import com.startupsdigidojo.activitylog.userEvents.application.dto.NewUserEvent;
-import com.startupsdigidojo.activitylog.userEvents.application.dto.UserLogInEvent;
+import com.startupsdigidojo.activitylog.userEvents.application.dto.*;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,8 +46,8 @@ public class UserKafkaConfiguration {
     }
 
     @Bean
-    public ConsumerFactory<String, NewUserEvent> newUserEventConsumerFactory() {
-        JsonDeserializer<NewUserEvent> jsonDeserializer = new JsonDeserializer<>(NewUserEvent.class);
+    public ConsumerFactory<String, UserCreatedEvent> userCreatedEventConsumerFactory() {
+        JsonDeserializer<UserCreatedEvent> jsonDeserializer = new JsonDeserializer<>(UserCreatedEvent.class);
         jsonDeserializer.addTrustedPackages("*");
         jsonDeserializer.setUseTypeMapperForKey(true);
 
@@ -60,9 +59,9 @@ public class UserKafkaConfiguration {
     }
 
     @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,NewUserEvent>> newUserEventKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String,NewUserEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(newUserEventConsumerFactory());
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, UserCreatedEvent>> userCreatedEventKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, UserCreatedEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(userCreatedEventConsumerFactory());
 
         return factory;
     }
@@ -84,6 +83,69 @@ public class UserKafkaConfiguration {
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,UserLogInEvent>> userLogInEventKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String,UserLogInEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(userLogInEventConsumerFactory());
+
+        return factory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, UserLogOutEvent> userLogOutEventConsumerFactory() {
+        JsonDeserializer<UserLogOutEvent> jsonDeserializer = new JsonDeserializer<>(UserLogOutEvent.class);
+        jsonDeserializer.addTrustedPackages("*");
+        jsonDeserializer.setUseTypeMapperForKey(true);
+
+        return new DefaultKafkaConsumerFactory<>(
+                baseUserConsumerProperties(),
+                new StringDeserializer(),
+                jsonDeserializer
+        );
+    }
+
+    @Bean
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,UserLogOutEvent>> userLogOutEventKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String,UserLogOutEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(userLogOutEventConsumerFactory());
+
+        return factory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, UserDeletedEvent> userDeletedEventConsumerFactory() {
+        JsonDeserializer<UserDeletedEvent> jsonDeserializer = new JsonDeserializer<>(UserDeletedEvent.class);
+        jsonDeserializer.addTrustedPackages("*");
+        jsonDeserializer.setUseTypeMapperForKey(true);
+
+        return new DefaultKafkaConsumerFactory<>(
+                baseUserConsumerProperties(),
+                new StringDeserializer(),
+                jsonDeserializer
+        );
+    }
+
+    @Bean
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,UserDeletedEvent>> userDeletedEventKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String,UserDeletedEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(userDeletedEventConsumerFactory());
+
+        return factory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, UserUpdatedEvent> userUpdatedEventConsumerFactory() {
+        JsonDeserializer<UserUpdatedEvent> jsonDeserializer = new JsonDeserializer<>(UserUpdatedEvent.class);
+        jsonDeserializer.addTrustedPackages("*");
+        jsonDeserializer.setUseTypeMapperForKey(true);
+
+        return new DefaultKafkaConsumerFactory<>(
+                baseUserConsumerProperties(),
+                new StringDeserializer(),
+                jsonDeserializer
+        );
+    }
+
+    @Bean
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,UserUpdatedEvent>> userUpdatedEventKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String,UserUpdatedEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(userUpdatedEventConsumerFactory());
 
         return factory;
     }
