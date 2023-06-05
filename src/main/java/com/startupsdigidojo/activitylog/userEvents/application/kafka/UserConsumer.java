@@ -16,8 +16,8 @@ public class UserConsumer {
 
     @KafkaListener(
             containerFactory = "newUserEventKafkaListenerContainerFactory",
-            topics = "${com.startupsdigidojo.activitylog.newUser.application.kafka.UserConsumer.topics.new_user}",
-            groupId = "${com.startupsdigidojo.activitylog.newUser.application.kafka.consumer.group_id}"
+            topics = "${com.startupsdigidojo.activitylog.userEvents.application.kafka.UserConsumer.topics.new_user}",
+            groupId = "${com.startupsdigidojo.activitylog.userEvents.application.kafka.consumer.group_id}"
     )
     public void syncNewUser(NewUserEvent newUserEvent) {
         System.out.println(newUserEvent);
@@ -26,8 +26,8 @@ public class UserConsumer {
 
     @KafkaListener(
             containerFactory = "userLogInEventKafkaListenerContainerFactory",
-            topics = "${com.startupsdigidojo.activitylog.newUser.application.kafka.UserConsumer.topics.user_log_in}",
-            groupId = "${com.startupsdigidojo.activitylog.newUser.application.kafka.consumer.group_id}"
+            topics = "${com.startupsdigidojo.activitylog.userEvents.application.kafka.UserConsumer.topics.user_log_in}",
+            groupId = "${com.startupsdigidojo.activitylog.userEvents.application.kafka.consumer.group_id}"
     )
     public void syncUserLogIn(UserLogInEvent userLogInEvent) {
         System.out.println(userLogInEvent);

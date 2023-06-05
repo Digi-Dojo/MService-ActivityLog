@@ -1,7 +1,6 @@
-package com.startupsdigidojo.activitylog.userEvents.application.kafka;
+package com.startupsdigidojo.activitylog.teamMemberEvents.application.kafka;
 
-import com.startupsdigidojo.activitylog.userEvents.application.dto.NewUserEvent;
-import com.startupsdigidojo.activitylog.userEvents.application.dto.UserLogInEvent;
+import com.startupsdigidojo.activitylog.teamMemberEvents.application.dto.NewTeamMemberEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +16,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.Map;
 
 @Configuration
-public class UserKafkaConfiguration {
+public class TeamMemberKafkaConfiguration {
     @Value("${spring.kafka.properties.bootstrap.servers}")
     private String bootstrapServers;
 
@@ -34,7 +33,7 @@ public class UserKafkaConfiguration {
     private String securityProtocol;
 
     @Bean
-    public Map<String, Object> baseUserConsumerProperties() {
+    public Map<String, Object> baseTeamMemberConsumerProperties() {
         return Map.of(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers,
                 "sasl.mechanism", saslMechanism,
@@ -47,45 +46,23 @@ public class UserKafkaConfiguration {
     }
 
     @Bean
-    public ConsumerFactory<String, NewUserEvent> newUserEventConsumerFactory() {
-        JsonDeserializer<NewUserEvent> jsonDeserializer = new JsonDeserializer<>(NewUserEvent.class);
+    public ConsumerFactory<String, NewTeamMemberEvent> newTeammemberEventConsumerFactory() {
+        JsonDeserializer<NewTeamMemberEvent> jsonDeserializer = new JsonDeserializer<>(NewTeamMemberEvent.class);
         jsonDeserializer.addTrustedPackages("*");
         jsonDeserializer.setUseTypeMapperForKey(true);
 
         return new DefaultKafkaConsumerFactory<>(
-                baseUserConsumerProperties(),
+                baseTeamMemberConsumerProperties(),
                 new StringDeserializer(),
                 jsonDeserializer
         );
     }
 
     @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,NewUserEvent>> newUserEventKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String,NewUserEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(newUserEventConsumerFactory());
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,NewTeamMemberEvent>> newTeamMemberEventKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String,NewTeamMemberEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(newTeammemberEventConsumerFactory());
 
         return factory;
     }
-
-    @Bean
-    public ConsumerFactory<String, UserLogInEvent> userLogInEventConsumerFactory() {
-        JsonDeserializer<UserLogInEvent> jsonDeserializer = new JsonDeserializer<>(UserLogInEvent.class);
-        jsonDeserializer.addTrustedPackages("*");
-        jsonDeserializer.setUseTypeMapperForKey(true);
-
-        return new DefaultKafkaConsumerFactory<>(
-                baseUserConsumerProperties(),
-                new StringDeserializer(),
-                jsonDeserializer
-        );
-    }
-
-    @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,UserLogInEvent>> userLogInEventKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String,UserLogInEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(userLogInEventConsumerFactory());
-
-        return factory;
-    }
-
 }
