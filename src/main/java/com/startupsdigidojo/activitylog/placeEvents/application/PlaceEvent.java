@@ -1,6 +1,6 @@
-package com.startupsdigidojo.activitylog.placeEvents;
+package com.startupsdigidojo.activitylog.placeEvents.application;
 
-import com.startupsdigidojo.activitylog.placeEvents.dto.PlaceEventDTO;
+import com.startupsdigidojo.activitylog.placeEvents.application.dto.PlaceEventDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

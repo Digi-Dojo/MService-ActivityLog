@@ -1,7 +1,9 @@
-package com.startupsdigidojo.activitylog.placeEvents.dto;
+package com.startupsdigidojo.activitylog.placeEvents.application.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 public class PlaceEventDTO {
     public static class PlaceInfo{
@@ -31,7 +33,7 @@ public class PlaceEventDTO {
                 ", place=" + payload.uuid +
                 ", place type=" + payload.type +
                 ", startup=" + payload.startup +
-                ", time=" + payload.time +
+                ", time=" + new Date(payload.time) +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package com.startupsdigidojo.activitylog.placeEvents;
+package com.startupsdigidojo.activitylog.placeEvents.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

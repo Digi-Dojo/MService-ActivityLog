@@ -1,8 +1,8 @@
-package com.startupsdigidojo.activitylog.placeEvents.kafka;
+package com.startupsdigidojo.activitylog.placeEvents.application.kafka;
 
-import com.startupsdigidojo.activitylog.placeEvents.dto.PlaceCreatedEvent;
-import com.startupsdigidojo.activitylog.placeEvents.dto.PlaceDeletedEvent;
-import com.startupsdigidojo.activitylog.placeEvents.dto.PlaceUpdatedEvent;
+import com.startupsdigidojo.activitylog.placeEvents.application.dto.PlaceCreatedEvent;
+import com.startupsdigidojo.activitylog.placeEvents.application.dto.PlaceDeletedEvent;
+import com.startupsdigidojo.activitylog.placeEvents.application.dto.PlaceUpdatedEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
