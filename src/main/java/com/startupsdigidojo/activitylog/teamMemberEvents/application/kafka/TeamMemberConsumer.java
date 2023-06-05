@@ -14,7 +14,7 @@ public class TeamMemberConsumer {
 
     @KafkaListener(
             containerFactory = "newTeamMemberEventKafkaListenerContainerFactory",
-            topics = "${com.startupsdigidojo.activitylog.teamMemberEvents.application.kafka.TeamMemberConsumer.topics.new_team_member}",
+            topics = "${com.startupsdigidojo.activitylog.teamMemberEvents.application.kafka.TeamMemberConsumer.topics.startup.added_user}",
             groupId = "${com.startupsdigidojo.activitylog.userEvents.application.kafka.consumer.group_id}"
     )
     public void syncNewTeamMember(NewTeamMemberEvent newTeamMemberEvent){
