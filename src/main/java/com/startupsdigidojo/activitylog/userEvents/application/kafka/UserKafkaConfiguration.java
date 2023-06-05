@@ -1,6 +1,7 @@
 package com.startupsdigidojo.activitylog.userEvents.application.kafka;
 
 import com.startupsdigidojo.activitylog.userEvents.application.dto.NewUserEvent;
+import com.startupsdigidojo.activitylog.userEvents.application.dto.UserLogInEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -62,6 +63,27 @@ public class UserKafkaConfiguration {
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,NewUserEvent>> newUserEventKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String,NewUserEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(newUserEventConsumerFactory());
+
+        return factory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, UserLogInEvent> userLogInEventConsumerFactory() {
+        JsonDeserializer<UserLogInEvent> jsonDeserializer = new JsonDeserializer<>(UserLogInEvent.class);
+        jsonDeserializer.addTrustedPackages("*");
+        jsonDeserializer.setUseTypeMapperForKey(true);
+
+        return new DefaultKafkaConsumerFactory<>(
+                baseUserConsumerProperties(),
+                new StringDeserializer(),
+                jsonDeserializer
+        );
+    }
+
+    @Bean
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,UserLogInEvent>> userLogInEventKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String,UserLogInEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(userLogInEventConsumerFactory());
 
         return factory;
     }
