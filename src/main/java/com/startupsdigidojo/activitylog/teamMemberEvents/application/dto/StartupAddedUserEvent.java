@@ -1,4 +1,4 @@
 package com.startupsdigidojo.activitylog.teamMemberEvents.application.dto;
 
-public class NewTeamMemberEvent extends TeamMemberEventDTO{
+public class StartupAddedUserEvent extends TeamMemberEventDTO{
 }
