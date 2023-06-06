@@ -5,9 +5,6 @@ import com.startupsdigidojo.activitylog.startupEvents.application.StartupEvent;
 import com.startupsdigidojo.activitylog.startupEvents.application.dto.StartupCreatedEvent;
 import com.startupsdigidojo.activitylog.startupEvents.application.dto.StartupDeletedEvent;
 import com.startupsdigidojo.activitylog.startupEvents.application.dto.StartupUpdatedEvent;
-import com.startupsdigidojo.activitylog.userEvents.application.UserEvent;
-import com.startupsdigidojo.activitylog.userEvents.application.dto.UserDeletedEvent;
-import com.startupsdigidojo.activitylog.userEvents.application.dto.UserUpdatedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -32,7 +29,7 @@ public class StartupConsumer {
             topics = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.startupConsumer.topics.startup.deleted}",
             groupId = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.consumer.group_id}"
     )
-    public void syncUserDeleted(StartupDeletedEvent startupDeletedEvent) {
+    public void syncStartupDeleted(StartupDeletedEvent startupDeletedEvent) {
         System.out.println(startupDeletedEvent);
         manageStartupEvent.saveStartupEvent(new StartupEvent(startupDeletedEvent));
     }
@@ -42,7 +39,7 @@ public class StartupConsumer {
             topics = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.startupConsumer.topics.startup.updated}",
             groupId = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.consumer.group_id}"
     )
-    public void syncUserUpdated(StartupUpdatedEvent startupUpdatedEvent) {
+    public void syncStartupUpdated(StartupUpdatedEvent startupUpdatedEvent) {
         System.out.println(startupUpdatedEvent);
         manageStartupEvent.saveStartupEvent(new StartupEvent(startupUpdatedEvent));
     }
