@@ -36,7 +36,7 @@ public class TeamMemberEventDTO {
 
     @Override
     public String toString() {
-        return "Event{" +
+        return "Team Member Event{" +
                 "type='" + type + '\'' +
                 "team member=" + payload.getId() +
                 "time=" + new Date(payload.getTime()) +
