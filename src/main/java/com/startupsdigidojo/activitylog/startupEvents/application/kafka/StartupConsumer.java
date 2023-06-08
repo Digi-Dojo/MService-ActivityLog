@@ -19,8 +19,8 @@ public class StartupConsumer {
 
     @KafkaListener(
             containerFactory = "startupCreatedEventKafkaListenerContainerFactory",
-            topics = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.StartupCOnsumer.topics.startup.created}",
-            groupId = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.consumer.group_id}"
+            topics = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.StartupConsumer.topics.startup.created}",
+            groupId = "${com.startupsdigidojo.activitylog.userEvents.application.kafka.consumer.group_id}"
     )
     public void syncNewStartup(StartupCreatedEvent startupCreatedEvent) {
         System.out.println(startupCreatedEvent);
@@ -29,8 +29,8 @@ public class StartupConsumer {
 
     @KafkaListener(
             containerFactory = "startupDeletedEventKafkaListenerContainerFactory",
-            topics = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.startupConsumer.topics.startup.deleted}",
-            groupId = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.consumer.group_id}"
+            topics = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.StartupConsumer.topics.startup.deleted}",
+            groupId = "${com.startupsdigidojo.activitylog.userEvents.application.kafka.consumer.group_id}"
     )
     public void syncUserDeleted(StartupDeletedEvent startupDeletedEvent) {
         System.out.println(startupDeletedEvent);
@@ -39,8 +39,8 @@ public class StartupConsumer {
 
     @KafkaListener(
             containerFactory = "startupUpdatedEventKafkaListenerContainerFactory",
-            topics = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.startupConsumer.topics.startup.updated}",
-            groupId = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.consumer.group_id}"
+            topics = "${com.startupsdigidojo.activitylog.startupEvents.application.kafka.StartupConsumer.topics.startup.updated}",
+            groupId = "${com.startupsdigidojo.activitylog.userEvents.application.kafka.consumer.group_id}"
     )
     public void syncUserUpdated(StartupUpdatedEvent startupUpdatedEvent) {
         System.out.println(startupUpdatedEvent);

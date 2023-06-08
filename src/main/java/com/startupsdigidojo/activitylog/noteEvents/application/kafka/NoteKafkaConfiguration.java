@@ -35,7 +35,7 @@ public class NoteKafkaConfiguration {
     private String securityProtocol;
 
     @Bean
-    public Map<String, Object> basePlaceConsumerProperties() {
+    public Map<String, Object> baseNoteConsumerProperties() {
         return Map.of(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers,
                 "sasl.mechanism", saslMechanism,
@@ -54,7 +54,7 @@ public class NoteKafkaConfiguration {
         jsonDeserializer.setUseTypeMapperForKey(true);
 
         return new DefaultKafkaConsumerFactory<>(
-                basePlaceConsumerProperties(),
+                baseNoteConsumerProperties(),
                 new StringDeserializer(),
                 jsonDeserializer
         );
@@ -75,7 +75,7 @@ public class NoteKafkaConfiguration {
         jsonDeserializer.setUseTypeMapperForKey(true);
 
         return new DefaultKafkaConsumerFactory<>(
-                basePlaceConsumerProperties(),
+                baseNoteConsumerProperties(),
                 new StringDeserializer(),
                 jsonDeserializer
         );
@@ -96,7 +96,7 @@ public class NoteKafkaConfiguration {
         jsonDeserializer.setUseTypeMapperForKey(true);
 
         return new DefaultKafkaConsumerFactory<>(
-                basePlaceConsumerProperties(),
+                baseNoteConsumerProperties(),
                 new StringDeserializer(),
                 jsonDeserializer
         );
